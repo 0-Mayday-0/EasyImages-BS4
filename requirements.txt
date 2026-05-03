@@ -1,0 +1,4 @@
+beautifulsoup4 >= 4.14.3
+requests >= 2.33.1
+pyperclip >= 1.11.0
+colorama >= 0.4.6
