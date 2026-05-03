@@ -63,7 +63,9 @@ class Crawler:
                 self._current_page += 1
                 self._start_at += self._start_steps
                 era_soup = BeautifulSoup(requests.get(f'{self._base_uri}viewforum.php?f={self._era_to_id[era]}&start={self._start_at}').text, 'html.parser')
-        print(f'{colorama.Fore.RED}Image not found.')
+        if not found:
+            print(f'{colorama.Fore.RED}Image not found.')
+        self._current_page = 1
 
     def _lookup_image(self, url: str) -> None:
         images_soup: BeautifulSoup = BeautifulSoup(requests.get(url).text, 'html.parser')
@@ -78,11 +80,6 @@ class Crawler:
         elif found:
             ppc.copy(image['src'])
             print(f'{colorama.Fore.GREEN}Copied: {colorama.Fore.BLUE}{image['src']}')
-
-        #elif not found and self._current_page == self._max_page:
-
-
-
 
 def main() -> None:
     c: Crawler = Crawler('http://www.pesmitidelcalcio.com/')
